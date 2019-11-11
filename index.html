@@ -51,65 +51,35 @@
     <script type="text/javascript" src="./lib/classes/keyboard.js"></script>
     <script type="text/javascript" src="./lib/classes/api.js"></script>
     <script type="text/javascript" src="./lib/api_ui.js"></script>
-    <script type="text/javascript" src="./lib/match_runner.js"></script>
+    <script type="text/javascript" src="./lib/runner/match.js"></script>
+    <script type="text/javascript" src="./lib/runner/ranking.js"></script>
+    <script type="text/javascript" src="./lib/runner/tournament.js"></script>
+    <script type="text/javascript" src="./lib/runner/match_runner.js"></script>
 
     <link rel="stylesheet" href="./style/grid_game.css"/>
+    <link rel="stylesheet" href="./style/runner.css"/>
     <script src="lib/info.js"></script>
+    <script src="config/bots.js"></script>
   </head>
   <body>
     <h1>Grid Game</h1>
 
-
-    <h2 id="current_match"></h2>
+    <h2>Matches played: <span id="match_no">0</span></h2>
     <div class="info">
-      <p class="turn"><b>Turn:</b> <span id="turn">0</span></p>
       <table>
         <thead>
           <tr>
             <th>Green</th>
-            <th>Score</th>
+            <th colspan="3">Score</th>
             <th>Red</th>
+            <th>Result</th>
           </tr>
         </thead>
         <tbody id="scores_body">
         </tbody>
       </table>
     </div>
-    <div class="footer">
-      <p>
-        <a href="https://www.github.com/AJFaraday/grid_game" target="_blank">Grid Game</a>
-        is a board-like game concept by
-        <a href="https://www.twitter.com/MarmiteJunction" target="_blank">Andrew Faraday</a>.
-      </p>
-      <p>It's a pretty juvenile project, so bear with me. It's still being built and updated.</p>
-      <p>
-        Feel free to let me know about any issues you find using the
-        <a href="https://github.com/AJFaraday/grid_game/issues" target="_blank">issue tracker</a>.
-      </p>
-
-
-    </div>
-    <div class="modal_background"></div>
     <script type="text/javascript">
-      function set_player_to_gist(colour, gist) {
-        var api_space;
-        if(colour == 'green') {
-          api_space = $('div.api_space.api_0');
-        } else if(colour == 'red') {
-          api_space = $('div.api_space.api_1');
-        }
-        var select = api_space.find('select');
-        var options = [];
-        select.find('option').each(function(i, o) {
-          options.push($(o).attr('value'));
-        });
-        if(options.includes(gist)) {
-          select.val(gist).trigger('change');
-        } else {
-          select.val('bot_id').trigger('change');
-          select.siblings('input').val(gist).trigger('change');
-        }
-      }
 
       $(window).ready(function() {
         GridGame.init(
@@ -119,23 +89,6 @@
           }
         );
         GridGame.api_ui.init();
-        url = new URL(window.location);
-        red_gist = url.searchParams.get('red');
-        if(red_gist) {
-          set_player_to_gist('red', red_gist)
-        }
-        green_gist = url.searchParams.get('green');
-        if(green_gist) {
-          set_player_to_gist('green', green_gist)
-        }
-
-        GridGame.callbacks.push(
-          function() {
-            if ((GridGame.turn_number % 3000) == 0) {
-              GridGame.end_game();
-            }
-          }
-        );
       });
     </script>
   </body>

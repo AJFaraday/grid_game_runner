@@ -1,0 +1,36 @@
+<h1><%= @bot %></h1>
+<% bot_matches = matches.select {|m| m['Green Gist'] == @gist || m['Red Gist'] == @gist} %>
+
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+
+  <body>
+    <table>
+      <thead>
+        <th>Green</th>
+        <th>Score</th>
+        <th>Red</th>
+        <th>Turns</th>
+        <th>Type</th>
+      </thead>
+      <tbody>
+        <% bot_matches.each do |match| %>
+          <tr>
+            <td>
+              <a target='_blank' href="https://ajfaraday.github.io/grid_game?green=<%= match['Green Gist'] %>&red=<%= match['Red Gist'] %>">
+                <%= match['Green Name'] %>
+              </a>
+            </td>
+            <td><%= match['Green Score'] %> - <%= match['Red Score'] %></td>
+            <td><%= match['Red Name'] %></td>
+            <td><%= match['Turns'] %></td>
+            <td><%= match['Result Type'] %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </body>
+
+</html>
