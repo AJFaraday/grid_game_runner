@@ -24,7 +24,8 @@ paths = [
   'lib/runner/match.js',
   'lib/runner/ranking.js',
   'lib/runner/tournament.js',
-  'lib/runner/match_runner.js'
+  'lib/runner/match_runner.js',
+  'data/init_gist_cache.js'
 ]
 command = 'node --harmony '
 paths.each do |path|

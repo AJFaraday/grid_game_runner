@@ -24,4 +24,16 @@ Run a tournament
  ```
  
  
+ ---
+ 
+ Minimal case for current error
+ 
+```
+ruby test.rb
+```
+ 
+In this case, we expect 'orbit' vs 'CBC goes with everything' to score 19 - 0, but it instead scores 18 - 0.
+
+We're looking for some variable escaping from one match to another.
+ 
  
