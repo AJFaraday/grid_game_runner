@@ -8,6 +8,10 @@ fs.writeFile(
   'data/rankings.csv',
   'Bot\t\Gist\tScore\tOutright\tTimeout\tDraws\tLosses\n'
 );
+fs.writeFile(
+  'data/movelog.txt',
+  ''
+);
 
 
 GridGame.init();
